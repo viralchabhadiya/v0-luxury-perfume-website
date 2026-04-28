@@ -96,5 +96,35 @@ function session()
     };
 }
 
-// Initialize database
+// Initialize database connection
 require_once APPPATH . '/Database.php';
+
+// Get database instance
+function db() {
+    static $db = null;
+    if ($db === null) {
+        $db = Database::getInstance();
+    }
+    return $db;
+}
+
+// Load environment variables
+function env($key, $default = null) {
+    $envFile = BASEPATH . '/.env';
+    
+    static $envVars = null;
+    if ($envVars === null) {
+        $envVars = [];
+        if (file_exists($envFile)) {
+            $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            foreach ($lines as $line) {
+                if (strpos($line, '=') !== false && strpos($line, '#') !== 0) {
+                    list($key, $value) = explode('=', $line, 2);
+                    $envVars[trim($key)] = trim($value);
+                }
+            }
+        }
+    }
+    
+    return $envVars[$key] ?? $default;
+}
