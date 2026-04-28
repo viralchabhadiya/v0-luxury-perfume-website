@@ -1,0 +1,20 @@
+{
+  "name": "patel-perfumes",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "php artisan serve",
+    "build": "npm run build:css",
+    "build:css": "tailwindcss -i ./resources/css/app.css -o ./public/css/app.css",
+    "watch": "tailwindcss -i ./resources/css/app.css -o ./public/css/app.css --watch"
+  },
+  "dependencies": {
+    "gsap": "^3.12.2"
+  },
+  "devDependencies": {
+    "tailwindcss": "^4.2.0",
+    "postcss": "^8.5.0",
+    "autoprefixer": "^10.4.20"
+  }
+}
